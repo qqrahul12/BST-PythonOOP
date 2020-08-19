@@ -1,16 +1,17 @@
 #BINARY SEARCH TREE
+from collections import deque
 class TreeNode():
     def __init__(self,data):
         self.data  = data
         self.left  = None
         self.right = None
     def __str__(self):
-        ans = ""
-        if self.left:
-            ans+="l {} ".format(self.left.data)
+        ans=""
+        # if self.left:
+        #     ans+="l {} ".format(self.left.data)
         ans+="{} ".format(self.data)
-        if self.right:
-            ans+="r {}".format(self.right)
+        # if self.right:
+        #     ans+="r {}".format(self.right)
         return ans
 class Tree():                               #Binary Search Tree
     io = ""
@@ -90,7 +91,22 @@ def deleteNode(root,data):
             root.right = deleteNode(root.right,tmp.data)
     return root
 def levelOrder(root):
-    return None
+    x = root
+    q = deque()
+    q.append(x)
+    q.append(0)
+    while q:
+        while q and q[0]!=0:
+            y = q.popleft()
+            print("{} ".format(y.data),end="")
+            if y.left:
+                q.append(y.left)
+            if y.right:
+                q.append(y.right)
+            if q[0]==0:
+                q.append(0)
+        if q[0]==0:
+            q.popleft()
 def height(root):
     if not root:
         return 0
@@ -112,20 +128,23 @@ t1.add(1)
 t1.add(2)
 t1.add(9)
 t1.add(8)
-preOrder(t1.root)
-print("")
+# preOrder(t1.root)
+# print("")
 t1.remove(2)
-preOrder(t1.root)
-print("")
+# preOrder(t1.root)
+# print("")
 t1.add(-3)
 t1.add(0.5)
 t1.add(-4)
 t1.remove(-3)
-preOrder(t1.root)
-print("")
+# preOrder(t1.root)
+# print("")
 t1.add(4.2)
 t1.remove(4)
-preOrder(t1.root)
-print("")
+# preOrder(t1.root)
+# print("")
 print(height(t1.root))
 print("size:{} ".format(size(t1.root)))
+preOrder(t1.root)
+print("")
+levelOrder(t1.root)
